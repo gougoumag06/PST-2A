@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:4.4
+    container_name: mongo
+    restart: unless-stopped
+    ports:
+      # Relie le port 27017 du conteneur au port 27017 de ton Debian local
+      - "27017:27017"
+    volumes:
+      # Sauvegarde les données sur ton ordinateur pour ne pas les perdre si le conteneur s'éteint
+      - mongo_data:/data/db
+
+volumes:
+  # Déclaration du volume de sauvegarde
+  mongo_data:
