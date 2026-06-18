@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Joueur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/main.css') }}">
+</head>
+<body>
+    <div class="home-container">
+        <h1 class="home-title">READY, {{ pseudo }} !</h1>
+    
+        <p class="home-description">PLAYER 1 STAGE SELECT</p>
+   
+        <div class="choice-buttons">
+            <a href="{{ url_for('player.InGame') }}" style="width: 100%; max-width: 400px;">
+                <button class="btn leaderboard-btn" style="border-color: #00FF00; color: #00FF00; box-shadow: 4px 4px 0px #00FF00;">
+                    START GAME
+                </button>
+            </a>
+
+            <a href="{{ url_for('player.login') }}" style="width: 100%; max-width: 400px;">
+                <button class="btn admin-btn" style="border-color: #FF0055; color: #FF0055; box-shadow: 4px 4px 0px #FF0055; background: #000 !important;">
+                    QUIT GAME
+                </button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

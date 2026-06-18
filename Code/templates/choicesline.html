@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choix de la Ligne</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/choicesline.css') }}">
+</head>
+<body>
+    <div class="home-container">
+        <h1 class="home-title">CONFIG</h1>
+        <p class="home-description">SELECT YOUR PRODUCTION LINE</p>
+        
+        <div class="choice-buttons">
+            <a href="{{ url_for('player.login', line=1) }}" style="text-decoration: none;">
+                <button class="btn line-btn line-1">🏭 LIGNE 1</button>
+            </a>
+
+            <a href="{{ url_for('player.login', line=2) }}" style="text-decoration: none;">
+                <button class="btn line-btn line-2">🏭 LIGNE 2</button>
+            </a>
+        </div>
+        
+        <div style="margin-top: 40px;">
+            <a href="{{ url_for('main.index') }}">
+                <button class="btn setting-btn">RETOUR</button>
+            </a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='JS/choicesline.js') }}"></script>
+</body>
+</html>

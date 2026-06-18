@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Choix du login</title>
+    <!-- Ajout de la police Retro Arcade 8-bit -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/main.css') }}">
+</head>
+<body>
+    <div class="home-container">
+        <h1 class="home-title">BIENVENUE</h1>
+        <p class="home-description">INSERT COIN TO SELECT MODE</p>
+        <div class="choice-buttons">
+            <a href="{{ url_for('admin.setting_admin') }}">
+                <button class="btn setting-btn">SETTINGS</button>
+            </a>
+            <a href="{{ url_for('admin.leaderboard') }}">
+                <button class="btn leaderboard-btn">HIGH SCORES</button>
+            </a>
+            <a href="{{ url_for('admin.choicesline') }}">
+                <button class="btn choicesline-btn">START 2P</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
