@@ -1,0 +1,51 @@
+question                                                                           , bonne_reponse, mauvaise_reponse_1, mauvaise_reponse_2, mauvaise_reponse_3, mauvaise_reponse_4, mauvaise_reponse_5
+Quel est le degré du polynôme nul ?                                                , -∞           , 0                 , 1                 , +∞                , -1                , Indéfini
+deg(P)=3 et deg(Q)=5 : degré de P*Q ?                                              , 8            , 15                , 5                 , 3                 , 2                 , 0
+deg(P)=3 et deg(Q)=5 : degré de P+Q ?                                              , 5            , 3                 , 8                 , 15                , 2                 , 0
+Reste de la division de X²+1 par X-1 ?                                             , 2            , 0                 , 1                 , -1                , X                 , 3
+Si P(a)=0 P est divisible par ?                                                    , X - a        , X + 1             , X + a             , X                 , aX                , X - 1
+Degré de P(X) = (X³+1)² ?                                                          , 6            , 5                 , 9                 , 3                 , 2                 , 8
+Coefficients dominants 3 et 2 : celui de P*Q ?                                     , 6            , 5                 , 3                 , 2                 , 9                 , 1
+Degré d'un polynôme constant non nul ?                                             , 0            , 1                 , -∞                , Indéfini          , Dépendant         , +∞
+Reste de la division de 23 par 5 ?                                                 , 3            , 1                 , 2                 , 4                 , 0                 , 5
+À quoi est congru -2 modulo 7 ?                                                    , 5            , 2                 , 1                 , 6                 , 0                 , 3
+Si a≡3 [5] que vaut a² modulo 5 ?                                                  , 4            , 1                 , 2                 , 3                 , 0                 , 8
+Reste de 10^5 modulo 9 ?                                                           , 1            , 0                 , 2                 , 8                 , 5                 , 7
+Un entier est divisible par 3 si la somme de ses chiffres est divisible par ?      , 3            , 8                 , 2                 , 1                 , 7                 , 5
+Si a≡b [n] que vaut a-b modulo n ?                                                 , 0            , 1                 , w                 , 2                 , -1                , b
+Reste de 15 modulo 7 ?                                                             , 1            , 2                 , 3                 , 4                 , 0                 , 5
+Si 3x≡1 [5] valeur entière positive minimale de x ?                                , 2            , 1                 , 3                 , 4                 , 0                 , 5
+Système avec une ligne 0=5 : combien de solutions ?                                , Aucune       , Une seule         , Une infinité      , Deux              , Cinq              , Indéterminé
+Premier coefficient non nul d'une ligne d'une matrice échelonnée ?                 , Pivot        , Base              , Column            , Rang              , Noyau             , Vecteur
+#verif Système 3×3 avec 3 pivots : combien de solutions ?                          , Une unique   , Aucune            , Une infinité      , Trois             , Zéro              , Deux
+Opération sur lignes ne modifiant pas les solutions ?                              , L1 ← L1 + L2 , L1 ← L1 * 0       , L1 ← L1²          , L1 ← L1 + 5       , L1 ← 1/L1         , Aucune
+#verif Taille de la matrice : 3 équations et 4 inconnues ?                         , 3 × 4        , 4 × 3             , 3 × 3             , 4 × 4             , 12                , 7
+Système compatible avec plus d'inconnues que d'équations ?                         , Une infinité , Une unique        , Aucune            , Deux              , Exactement n      , Zéro
+Dans une matrice échelonnée réduite les pivots valent ?                            , 1            , 0                 , -1                , Quelconque        , Positif           , Non nul
+Système x=2 et 0x=0 : solutions pour x ?                                           , Une unique   , Aucune            , Une infinité      , Deux              , Zéro              , Indéfini
+A de taille 2×3 et B de taille 3×4 : taille de AB ?                                , 2 × 4        , 3 × 3             , 2 × 3             , 3 × 4             , 4 × 2             , Impossible
+Transposée d'un vecteur colonne n×1 ?                                              , Ligne 1×n    , Colonne n×1       , Carrée n×n        , Scalaire          , Nulle             , Inversible
+Matrice carré avec 1 sur la diagonale et 0 ailleurs ?                              , Identité     , Nulle             , Asymétrique       , Transposée        , Inverse           , Droite
+Formule de (AB)ᵀ ?                                                                 , BᵀAᵀ         , AᵀBᵀ              , AB                , BA                , Aᵀ + Bᵀ           , -(AB)
+Rang maximum d'une matrice 3×5 ?                                                   , 3            , 5                 , 8                 , 15                , 2                 , 0
+Produit d'une matrice A par la matrice nulle ?                                     , Matrice nulle, Matrice A         , Identité          , Scalaire 0        , Indéfini          , 1
+Si A = Aᵀ la matrice est dite ?                                                    , Symétrique   , Inversible        , Nulle             , Identité          , Diagonale         , Asymétrique
+Taille de la matrice identité Id₃ ?                                                , 3 × 3        , 1 × 3             , 3 × 1             , 9                 , 3                 , 1
+Dimension de l'espace vectoriel ℝ⁴ ?                                               , 4            , 2                 , 3                 , 1                 , Ensemble          , Infini
+Famille de vecteurs engendrant tout l'espace ?                                     , Génératrice  , Libre             , basic             , Liée              , Colinéaire        , Nulle
+Si u = 3v  les vecteurs u et v sont ?                                              , Colinéaires  , Orthogonaux       , Libres            , Inverses          , Nuls              , Identiques
+Vecteur appartenant à tout sous-espace vectoriel ?                                 , Vecteur nul  , Vecteur unité     , Premier vecteur   , Aucun             , Tous              , Vecteur x
+Une famille de 3 vecteurs dans ℝ² est nécessairement ?                             , Liée         , Libre             , Une base          , Génératrice       , Nulle             , Colinéaire
+2 vecteurs non colinéaires dans ℝ² forment ?                                       , Une base     , Une famille liée  , Un chien          , Une droite        , L'espace nul      , Une matrice
+Dimension de Vect(u) avec u non nul ?                                              , 1            , 0                 , 2                 , n                 , Infini            , Dépend de u
+F ⊆ G et dim(F) = dim(G) implique ?                                                , F = G        , F ⊂ G             , F = {0}           , G = {0}           , F ∩ G = ∅         , Inconnu
+Que vaut toujours f(0) pour une application linéaire ?                             , 0            , 1                 , f(x)              , Indéfini          , -1                , Variable
+Ensemble des x tels que f(x)=0 ?                                                   , Noyau        , Image             , Base              , Rang              , Univers           , Départ
+Ensemble de toutes les valeurs prises par f(x) ?                                   , Image        , Noyau             , Domaine           , Rang              , Arrivée           , Base
+Selon le théorème du rang à quoi est égale la somme dim(ker(f)) + rg(f) ?          , Départ       , Arrivée           , Noyau             , Image             , Zéro              , La base
+f injective si et seulement si son noyau est ?                                     , {0}          , L'espace entier   , L'image           , Vide              , {1}               , Indéfini
+Application linéaire de ℝ³ dans ℝ² : peut-elle être injective ?                    , Non          , Oui               , Si f(x)=0         , Parfois           , Indépendant       , Toujours
+Application linéaire de ℝ² dans ℝ³ : peut-elle être surjective ?                   , Non          , Oui               , Parfois           , Toujours          , Si f est nulle    , Inconnu
+Si $A$ et $B$ sont deux matrices inversibles quelle est la formule de $(AB)^{-1}$ ?, B⁻¹A⁻¹       , A⁻¹B⁻¹            , AB                , BA                , A⁻¹ + B⁻¹         , Inexistante
+Rang d'une matrice carrée inversible de taille n ?                                 , Sa taille n  , 0                 , 1                 , n - 1             , n + 1             , Infini
+Application linéaire bijective s'appelle aussi ?                                   , Isomorphisme , Endomorphisme     , Projecteur        , Morphisme         , Noyau             , Pivot

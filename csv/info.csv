@@ -1,0 +1,51 @@
+question                                                                  , bonne_reponse                  , mauvaise_reponse_1, mauvaise_reponse_2  , mauvaise_reponse_3  , mauvaise_reponse_4, mauvaise_reponse_5
+Que stocke un pointeur en mémoire ?                                       , Adresse                        , Valeur            , Variable            , Fonction            , Octet             , Fichier
+Quel symbole déclare un pointeur en C ?                                   , *                              , &                 , %                   , #                   , ->                , .
+Quel opérateur récupère l'adresse d'une variable ?                        , &                              , *                 , ->                  , .                   , alloc             , sizeof
+Comment appelle-t-on l'accès via * à la valeur pointée ?                  , Déréférencement                , Allocation        , Déclaration         , Adressage           , Incrémentation    , Transtypage
+Valeur sécurisée d'un pointeur non initialisé ?                           , NULL                           , 0x01              , void                , 1                   , -1                , EOF
+Quel mot-clé regroupe des variables de types différents ?                 , struct                         , away              , typedef             , enum                , class             , array
+Quel opérateur accède à un champ via un pointeur de structure ?           , ->                             , .                 , *                   , &                   , ::                , =>
+Quel opérateur accède à un champ d'une variable structure ?               , .                              , ->                , *                   , &                   , ::                , =>
+Dans une union                                                            , où sont les champs en mémoire ?, Même adresse      , Adresses successives, Dans la pile        , Dans le tas       , Zones séparées
+Quel mot-clé crée un alias de type en C ?                                 , typedef                        , struct            , define              , alias               , using             , void
+Fonction qui s'appelle elle-même ?                                        , Récursive                      , Itérative         , Mutuelle            , Dynamique           , Principale        , Pointeur
+Qu'évite qu'une récursion s'appelle indéfiniment ?                        , Condition d'arrêt              , Boucle while      , Pointeur NULL       , Instruction return  , Variable globale  , Compilateur
+Quelle zone mémoire s'empile à chaque appel récursif ?                    , Pile                           , Tas               , Disque dur          , Registre            , Cache             , Segment de texte
+Deux fonctions qui s'appellent alternativement ?                          , Récursives mutuelles           , Récursives simples, Itératives          , Fonctions imbriquées, Bilinéaires       , Inverses
+Erreur en cas de récursivité infinie ?                                    , Stack overflow                 , Segmentation fault, Memory leak         , Buffer overflow     , Division by zero  , Null pointer
+Où l'allocation dynamique réserve-t-elle de l'espace ?                    , Tas                            , Pile              , Disque dur          , Registre            , Cache             , ROM
+Quelle fonction alloue sans initialiser ?                                 , malloc                         , calloc            , realloc             , free                , alloc             , sizeof
+Quelle fonction alloue et met les octets à zéro ?                         , calloc                         , malloc            , realloc             , free                , clear             , zero
+Quelle fonction libère la mémoire allouée ?                               , free                           , delete            , clear               , malloc              , remove            , release
+Quel opérateur donne la taille en octets d'un type ?                      , sizeof                         , malloc            , count               , length              , bytesize          , typeid
+Quel type C représente un pointeur sur un fichier ?                       , FILE*                          , int               , char*               , void*               , stream            , struct
+Quelle fonction ouvre un fichier ?                                        , fopen                          , fclose            , fread               , fwrite              , open              , fseek
+Quelle constante indique la fin d'un fichier ?                            , EOF                            , NULL              , 0                   , termnius            , STOP              , END
+Quelle fonction renvoie la position du curseur ?                          , ftell                          , fseek             , rewind              , fgetc               , fpos              , length
+Constante fseek pour la fin de fichier ?                                  , SEEK_END                       , SEEK_SET          , SEEK_CUR            , EOF                 , ORIGIN            , BOTTOM
+Convertissez 0101 de la base 2 vers la base 10.                           , 5                              , 3                 , 7                   , 10                  , 4                 , 6
+Résultat de 127+1 sur un char signé 8 bits ?                              , -128                           , 128               , 0                   , 127                 , -1                , 1
+Quel bit indique le signe dans un entier signé ?                          , Poids fort                     , Poids faible      , Bit central         , Bit de parité       , Aucun             , Premier bit
+Codage machine standard des entiers négatifs ?                            , Complément à 2                 , Complément à 1    , Signe-valeur        , Code gris           , Binaire pur       , Modulo
+Valeur max non signée sur 4 bits ?                                        , 15                             , 16                , 7                   , 8                   , 31                , 4
+Élément de base d'une liste chaînée ?                                     , Maillon                        , Noeud             , Vecteur             , Tableau             , Pile              , Champ
+Valeur de next du dernier maillon ?                                       , NULL                           , 0                 , void                , Drapeau             , Racine            , Adresse
+Liste permettant un parcours bidirectionnel ?                             , Doublement chaînée             , Simplement chaînée, Circulaire          , Triée               , Contiguë          , Matrice
+Liste où le dernier maillon pointe sur le premier ?                       , Circulaire                     , Double            , FIFO                , LIFO                , Triée             , Indexée
+Désavantage majeur d'une liste vs tableau ?                               , Accès séquentiel               , Taille fixe       , Allocation contiguë , Insertion lente     , Consommation fixe , Tri impossible
+Où se trouvent les éléments plus petits dans un ABR ?                     , Fils gauche                    , Fils droit        , Parent              , Feuilles droites    , Racine            , Nulle part
+Nœud sans enfant dans un arbre ?                                          , Feuille                        , Racine            , Pivot               , Maillon             , Noyau             , Interne
+Complexité de recherche dans un ABR équilibré ?                           , O(log n)                       , O(n)              , O(1)                , O(n²)               , O(n log n)        , O(e^n)
+Caractéristique principale d'un AVL vs ABR ?                              , Équilibré                      , Trié              , Linéaire            , Asymétrique         , Nul               , Circulaire
+Opération rétablissant l'équilibre d'un AVL ?                             , Rotation                       , Échelonnement     , Inversion           , Permutation         , Déréférencement   , Compression
+Sur quoi repose l'algorithme RLE ?                                        , Répétitions                    , Probabilités      , Dictionnaires       , Fréquences          , Signatures        , Arbres
+Type de la compression RLE ?                                              , Sans pertes                    , Avec pertes       , Destructif          , Aléatoire           , Hybride           , Inconnu
+Quel format image utilise souvent le RLE ?                                , BMP                            , JPEG              , MP3                 , MPEG                , TXT               , EXE
+Comment coder 'AAAAA' en RLE ?                                            , 5A                             , A3                , AAAAA               , 4A                  , A4                , 5
+Comment qualifie-t-on une compression pour retrouver le fichier original ?, Sans pertes                    , Avec pertes       , Partielle           , Approximative       , Incomplète        , Optimale
+Sur quoi repose la longueur des codes Huffman ?                           , Fréquence                      , Répétition        , Ordre alphabétique  , Taille fixe         , Position          , Index
+Qui a théorisé l'entropie en compression de données ?                     , Shannon                        , Huffman           , Gauss               , C Bibi              , Lucas             , Turing
+Structure construite pour générer les codes Huffman ?                     , Arbre binaire                  , Liste double      , Matrice             , Pile                , File              , Table de hachage
+Où se situent les symboles dans l'arbre de Huffman ?                      , Feuilles                       , Racine            , Nœuds internes      , Pivots              , Branches          , Partout
+Code où aucun mot n'est préfixe d'un autre ?                              , Préfixe                        , Fixe              , RLE                 , Binaire             , Signé             , Redondant

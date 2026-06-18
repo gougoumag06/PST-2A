@@ -1,0 +1,51 @@
+question,bonne_reponse,mauvaise_reponse_1,mauvaise_reponse_2,mauvaise_reponse_3,mauvaise_reponse_4,mauvaise_reponse_5
+Plus petit élément binaire valant 0 ou 1 ?,Bit,Octet,Quartet,Mot,Byte,Base
+Combien de bits compose un Quartet ?,4,2,8,10,16,32
+Combien de valeurs code un octet (8 bits) ?,256,8,16,64,128,512
+Valeur décimale du binaire non signé 1001 ?,9,5,7,8,11,13
+Code non pondéré avec un seul changement de bit entre deux mots ?,Gray,BCD,ASCII,Binaire pur,Hexadécimal,Décimal
+Quelle est la base du système hexadécimal ?,16,2,8,10,12,60
+Quelle lettre représente 11 en hexadécimal ?,B,A,C,D,E,F
+Codage où chaque chiffre décimal est sur 4 bits ?,BCD,Gray,Complément à 2,ASCII,Hexadécimal,Signé
+Qui a inventé l'algèbre binaire en 1847 ?,George Boole,De Morgan,Karnaugh,Shannon,Fourier,Arduino
+Quel opérateur réalise l'inversion d'une variable binaire ?,NOT,AND,OR,XOR,NAND,NOR
+Valeur de F = A + 1 (opérateur OR) ?,1,0,A,Non(A),2A,Indéterminé
+Valeur de F = A · Non(A) (opérateur AND) ?,0,A,Non(A),1,A²,Indéterminé
+Opérateur vrai uniquement si les deux entrées sont différentes ?,XOR,AND,OR,NOR,NAND,NOT
+Selon De Morgan, Non(A·B) est égal à ?,Non(A) + Non(B),Non(A) · Non(B),A + B,Non(A + B),A · B,Non(A) ⊕ Non(B)
+Outil tableau pour simplifier graphiquement des fonctions logiques ?,Table de Karnaugh,Table de vérité,Chronogramme,Diagramme de Bode,Spectre fréquentiel,Schéma bloc
+Symbole pour un état indifférent dans une table de Karnaugh ?,X,0,1,Z,Ø,Infini
+Combien de cases pour une table de Karnaugh à 4 variables ?,16,4,8,12,32,64
+Élément additionnel d'un système séquentiel vs combinatoire ?,Mémoire,Transistor,Résistance,Amplificateur,Diode,Condensateur
+Signal périodique de synchronisation noté CLK ?,Horloge,Alimentation,Entrée,Sortie,Donnée,Masse
+Bascule asynchrone construite avec deux portes NOR entrecroisées ?,Bascule RS,Bascule D,Bascule JK,Bascule T,Registre,Compteur
+État interdit d'une bascule RS quand R=1 et S=1 ?,Instable,Mémorisation,Mise à 1,Mise à 0,Synchrone,Reset
+État de la sortie d'une bascule RS si R=0 et S=0 ?,Mémorisation,Mise à 0,Mise à 1,Instable,Complémenté,Aléatoire
+Entrée dont l'action est immédiate sans attendre l'horloge ?,Asynchrone,Synchrone,Temporelle,Fréquentielle,Dynamique,Statique
+Bascule recopiant l'entrée sur la sortie lors d'un front d'horloge ?,Bascule D,Bascule RS,Verrou (Latch),Porte ET,Inverseur,Multiplexeur
+Terme anglais pour une bascule déclenchée sur front d'horloge ?,Flip-Flop,Latch,Gate,Switch,Buffer,Counter
+Entrée asynchrone forçant instantanément la sortie à 1 ?,Preset,Clear,Reset,Clock,Enable,Select
+Entrée asynchrone forçant instantanément la sortie à 0 ?,Clear,Preset,Clock,Set,Load,Data
+Bascule éliminant l'état interdit de la RS en inversant si J=K=1 ?,Bascule JK,Bascule D,Verrou D,Bascule RS,Registre tampon,Registre à décalage
+Application matérielle divisant la fréquence d'une horloge ?,Compteur,Filtre,Amplificateur,Redresseur,Décodeur,Multiplexeur
+Signal se répétant identiquement après un intervalle de temps ?,Périodique,Continu,Aléatoire,Apériodique,Transitoire,Constant
+Unité de mesure de la fréquence f d'un signal ?,Hertz,Seconde,Radian,Volt,Ampère,Watt
+Formule reliant la pulsation ω à la fréquence f ?,ω = 2πf,ω = 1/f,ω = 2π/f,ω = πf,ω = f/2π,ω = 2f
+Valeur moyenne d'un signal sinusoïdal alternatif ?,Zéro,Maxima,Minima,Crête-à-crête,Efficace,Indéterminé
+Écart maximal entre sommet positif et négatif d'une tension ?,Tension crête-à-crête,Amplitude simple,Tension efficace,Tension moyenne,Valeur absolue,Déphasage
+Appareil permettant d'observer un signal dans le temps ?,Oscilloscope,Voltmètre,Analyseur de spectre,GBF,Ampèremètre,Wattmètre
+Décalage angulaire temporel entre deux signaux sinusoïdaux ?,Déphasage,Amplitude,Fréquence,Pulsation,Période,Impédance
+Composant dont l'impédance tend vers l'infini quand f tend vers 0 ?,Condensateur,Résistance,Bobine,Diode,Transistor,Amplificateur
+Théoricien ayant démontré que tout signal est somme de sinusoïdes ?,Fourier,George Boole,Karnaugh,De Morgan,Bode,Arduino
+Premier harmonique de même fréquence que le signal global ?,Fondamental,Bruit,Spectre,Continu,Décade,Octave
+Appareil pour observer le spectre fréquentiel d'un signal ?,Analyseur de spectre,Oscilloscope,Multimètre,GBF,Wattmètre,Fréquencemètre
+Filtre atténuant les basses et laissant passer les hautes fréquences ?,Passe-haut,Passe-bas,Passe-bande,Coupe-bande,Actif,Amplificateur
+Filtre ne laissant passer qu'un intervalle de fréquences ?,Passe-bande,Passe-bas,Passe-haut,Coupe-bande,Passif,Inverseur
+Unité logarithmique pour exprimer le gain d'un filtre ?,Décibel,Hertz,Volt,Radian,Ohm,Watt
+Atténuation en dB par décade pour un filtre du premier ordre ?,-20 dB,-3 dB,-6 dB,-40 dB,0 dB,-12 dB
+Facteur multiplicatif séparant deux fréquences d'une décade ?,10,2,5,20,100,1000
+Filtre intégrant un composant nécessitant une alimentation externe ?,Actif,Passif,Idéal,Linéaire,Logarithmique,Symétrique
+Gain maximal théorique en dB pour un filtre purement passif ?,0 dB,+20 dB,+3 dB,-3 dB,Infini,+6 dB
+Composant intégré utilisé dans les filtres actifs pour amplifier ?,AOP,Résistance,Condensateur,Quartz,Diode Zener,Inductance
+Atténuation en dB définissant la fréquence de coupure standard ?,-3 dB,0 dB,-1 dB,-6 dB,-20 dB,-40 dB
+Deux filtres du 1er ordre en série : quel ordre pour le filtre global ?,Deuxième,Premier,Troisième,Quatrième,Zéro,Cinquième

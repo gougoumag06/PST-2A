@@ -1,0 +1,51 @@
+question,bonne_reponse,mauvaise_1,mauvaise_2,mauvaise_3,mauvaise_4,mauvaise_5
+Unité d'une fréquence ?,Hertz,Seconde,Mètre,Volt,Watt,Joule
+Inverse de la longueur d'onde ?,Nombre d'onde,La fréquence,La célérité,La phase,L'amplitude,Le retard
+Premier harmonique d'un signal ?,Le fondamental,La moyenne,La constante,Le maximum,Le résidu,Le pic
+Onde sur corde de guitare : transversale ou longitudinale ?,Transversale,Longitudinale,Circulaire,Rectiligne,Elliptique,Scalaire
+Symbole de la masse linéique ?,µ,ρ,λ,m,M,k
+Onde qui rencontre un obstacle fixe ?,Réflexion,Réfraction,Absorption,Polarisation,Atténuation,Dispersion
+Force qui ramène un ressort à l'équilibre ?,Force de rappel,Force magnétique,Force de Coulomb,Force de pesanteur,Force d'inertie,Force de Lorentz
+Direction de perturbation dans un ressort horizontal ?,Parallèle,Perpendiculaire,Verticale,Circulaire,Aléatoire,Oblique
+Composant qui dissipe par effet Joule ?,Résistance,Condensateur,Inductance,Diode,Fil idéal,Interrupteur
+Onde qui avance sans changer de forme ?,Onde progressive,Onde stationnaire,Onde évanescente,Onde amortie,Onde diffuse,Onde réfléchie
+Deux charges de même signe font quoi ?,Se repoussent,S'attirent,S'annulent,S'échauffent,Pivotent,S'accouplent
+Outil pour passer du potentiel au champ électrique ?,Gradient,Divergence,Rotationnel,Intégrale,Dérivée seconde,Produit vectoriel
+Unité de la charge électrique ?,Coulomb,Volt,Ampère,Farad,Ohm,Tesla
+Surface où le potentiel est identique partout ?,Surface équipotentielle,Surface plane,Surface chargée,Surface neutre,Surface conductrice,Surface nodale
+Potentiel à l'infini pour une charge isolée ?,Nul,Infini,Positif,Négatif,Constante indéterminée,Maximal
+Unité de la capacité d'un condensateur ?,Farad,Henry,Ohm,Siemens,Volt,Coulomb
+Loi liant tension et intensité (conducteur ohmique) ?,Loi d'Ohm,Loi de Gauss,Loi d'Ampère,Loi de Faraday,Loi de Lenz,Loi de Coulomb
+Porteurs de charge majoritaires dans un métal ?,Électrons,Ions positifs,Trous,Ions négatifs,Photons,Neutrons
+Intensité dans un circuit série ?,Identique partout,Variable,Nulle,Divisionnaire,Maximale au générateur,Minimale à la fin
+Que conserve la loi des mailles ?,La tension (énergie),La charge,Le courant,La matière,Le flux,La vitesse
+Un aimant a toujours un pôle Nord et un pôle... ?,Sud,Est,Ouest,Charge,Masse,Neutre
+Qu'est-ce qui crée un champ magnétique ?,Un courant électrique,Une charge fixe,Une résistance,Un isolant,Une différence de potentiel,Une onde sonore
+Lignes de champ dans un solénoïde infini ?,Lignes droites,Cercles,Spirales,Paraboles,Ellipses,Points
+Unité du flux magnétique ?,Weber,Tesla,Henry,Gauss,Volt,Watt
+Appareil de mesure du champ magnétique ?,Teslamètre,Voltmètre,Ampèremètre,Oscilloscope,Ohmmètre,Wattmètre
+La force de Lorentz est perpendiculaire à quoi ?,La vitesse,La masse,La charge,Le temps,La position,L'accélération
+Composant qui s'oppose aux variations de courant ?,Bobine,Condensateur,Résistance,Diode,Transistor,Interrupteur
+Courant dû à un aimant en mouvement ?,Induction,Électrostatique,Conduction,Rayonnement,Effet Joule,Auto-allumage
+Loi donnant e = -dΦ/dt ?,Loi de Faraday,Loi de Lenz,Loi d'Ohm,Loi d'Ampère,Loi de Gauss,Loi de Coulomb
+Unité de l'inductance propre d'une bobine ?,Henry,Farad,Tesla,Weber,Ohm,Volt
+Combien d'équations de Maxwell fondamentales ?,Quatre,Deux,Six,Trois,Une,Huit
+Source du champ électrique dans Maxwell-Gauss ?,La charge,Le courant,Le magnétisme,Le vide,Le potentiel,La vitesse
+La lumière visible appartient à quelle famille ?,Ondes électromagnétiques,Ondes acoustiques,Ondes sismiques,Ondes de choc,Ondes mécaniques,Ondes gravitationnelles
+Quel milieu la lumière traverse sans support matériel ?,Le vide,L'eau,L'air,Le verre,Le métal,Le plastique
+Vitesse approchée de la lumière dans le vide ?,3×10^8 m/s,3×10^5 m/s,3×10^6 m/s,340 m/s,1500 m/s,3×10^10 m/s
+Plans où l'onde a la même valeur (OPPM) ?,Plans d'onde,Plans nodaux,Plans de phase,Plans de coupe,Plans miroirs,Plans focaux
+Ordre de grandeur de la longueur d'onde visible ?,Nanomètre,Kilomètre,Mètre,Millimètre,Picomètre,Micromètre
+Domaine à fréquence plus haute que le visible ?,Ultraviolets,Infrarouges,Micro-ondes,Ondes radio,Ondes ELF,Ondes submillimétriques
+Vecteur indiquant la direction de propagation ?,Vecteur d'onde,Vecteur position,Vecteur vitesse,Vecteur force,Vecteur champ,Vecteur surface
+Le vecteur de Poynting est lié au transport de... ?,L'énergie,La charge,La masse,Le courant,Les atomes,Le fluide
+Polarisation qui dessine une ligne droite pour E ?,Rectiligne,Circulaire,Elliptique,Aléatoire,Tournante,Nulle
+Composant pour polariser une lumière non polarisée ?,Polariseur,Lentille,Miroir,Prisme,Fente,Écran
+Polarisation utilisée dans les lunettes 3D cinéma ?,Circulaire,Rectiligne,Aléatoire,Verticale pure,Horizontale pure,Aucune
+Indice de réfraction du vide ?,1,0,Infini,1.33,1.5,2
+Câble utilisé pour brancher la TV ?,Câble coaxial,Guide rectangulaire,Ligne bifilaire,Fibre optique nue,Guide circulaire,Fil de cuivre simple
+Guide utilisant la réflexion totale interne ?,Fibre optique,Guide métallique,Tube creux,Câble torsadé,Ruban supraconducteur,Guide d'onde plan
+Onde sous la fréquence de coupure d'un guide ?,Atténuée / Évanescente,Transmise,Amplifiée,Accélérée,Redressée,Doublée
+Mode le plus simple dans un guide rectangulaire ?,TE10,TE00,TM00,TEM,TE11,TM11
+Vitesse de phase et de groupe en milieu non dispersif ?,Égales,Opposées,Inverses,Nulles,Infinies,Aléatoires
+Unité de l'impédance d'onde dans le vide ?,Ohm,Volt,Ampère,Tesla,Henry,Farad
