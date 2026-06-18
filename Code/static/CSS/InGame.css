@@ -1,0 +1,379 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+/* =========================================
+   BLOCAGE DU SCROLL ET CENTRAGE GLOBAL
+========================================= */
+body {
+    font-family: 'VT323', monospace;
+    background-color: #000000;
+    background-image: 
+        linear-gradient(rgba(255, 0, 85, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 85, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px; 
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+    color: #FFFFFF;
+    box-sizing: border-box;
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    
+    /* MAGIE ADAPTATIVE : La taille s'adapte à la hauteur de l'écran */
+    font-size: clamp(14px, 2.5vh, 22px); 
+}
+
+h1 {
+    text-align: center;
+    color: #FFFF00; 
+    font-size: 2.2em; 
+    margin-bottom: clamp(10px, 2vh, 20px);
+    margin-top: 0;
+    text-shadow: 4px 4px 0px #666600; 
+    flex-shrink: 0; 
+}
+
+/* =========================================
+   ANIMATION DES LOGOS DANS LES BANDES NOIRES
+========================================= */
+.side-bg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: calc(50vw - 560px); 
+    z-index: -1;
+    overflow: hidden; 
+    pointer-events: none; 
+}
+.left-bg { left: 0; }
+.right-bg { right: 0; }
+
+.floating-logo {
+    position: absolute;
+    width: clamp(60px, 8vw, 95px); /* S'adapte à la largeur de l'écran */
+    opacity: 0.15; 
+    filter: drop-shadow(4px 4px 0px #00CCFF); 
+}
+
+.l-1 { top: 5%; left: 10%; animation: floatL 15s ease-in-out infinite alternate; }
+.l-2 { bottom: 10%; left: 40%; animation: floatLRev 20s ease-in-out 2s infinite alternate-reverse; }
+.l-3 { top: 45%; left: 50%; animation: floatL 22s ease-in-out 4s infinite alternate; }
+.l-4 { bottom: 40%; left: 15%; animation: floatLRev 18s ease-in-out 1s infinite alternate-reverse; }
+
+.r-1 { top: 10%; right: 15%; animation: floatR 18s ease-in-out infinite alternate; }
+.r-2 { bottom: 15%; right: 35%; animation: floatRRev 22s ease-in-out 3s infinite alternate-reverse; }
+.r-3 { top: 50%; right: 45%; animation: floatR 25s ease-in-out 5s infinite alternate; }
+.r-4 { bottom: 45%; right: 10%; animation: floatRRev 19s ease-in-out 2s infinite alternate-reverse; }
+
+@keyframes floatL {
+    0% { transform: translateY(0) rotate(-15deg); }
+    100% { transform: translateY(45vh) rotate(15deg); }
+}
+@keyframes floatLRev {
+    0% { transform: translateY(0) rotate(10deg); }
+    100% { transform: translateY(-45vh) rotate(-20deg); }
+}
+@keyframes floatR {
+    0% { transform: translateY(0) rotate(-20deg); }
+    100% { transform: translateY(40vh) rotate(20deg); }
+}
+@keyframes floatRRev {
+    0% { transform: translateY(0) rotate(15deg); }
+    100% { transform: translateY(-40vh) rotate(-15deg); }
+}
+
+/* =========================================
+   LAYOUT DYNAMIQUE ET ÉTIREMENT 
+========================================= */
+.ingame-layout {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: stretch; 
+    gap: clamp(20px, 3vw, 40px); 
+    width: 100%;
+    max-width: 1100px;
+    margin-top: clamp(10px, 3vh, 30px);    
+    margin-bottom: clamp(15px, 4vh, 40px); 
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+    height: calc(100vh - 150px); 
+    overflow: hidden; 
+}
+
+.side-panel {
+    width: clamp(250px, 25vw, 320px); 
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(15px, 2.5vh, 25px);
+    height: 100%; 
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+
+.game-panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 750px;
+    height: 100%; 
+    padding-right: 15px; 
+    overflow-y: auto; 
+}
+
+/* LA MAGIE DE L'ÉCRAN D'ATTENTE (STANDALONE) */
+.game-panel:not(:has(> div:not([style*="display: none"]))) {
+    display: none;
+}
+
+.ingame-layout:not(:has(.game-panel > div:not([style*="display: none"]))) .side-panel {
+    width: 100%;
+    max-width: 800px; 
+}
+
+.ingame-layout:not(:has(.game-panel > div:not([style*="display: none"]))) .status-box {
+    border-width: 8px; 
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05); 
+}
+
+.ingame-layout:not(:has(.game-panel > div:not([style*="display: none"]))) .status-box h3 {
+    font-size: 2em !important;
+    margin-bottom: 25px !important;
+    color: #FFFF00 !important; 
+}
+
+.ingame-layout:not(:has(.game-panel > div:not([style*="display: none"]))) .status-message {
+    font-size: 1.6em !important;
+    margin-bottom: 40px !important;
+}
+
+.ingame-layout:not(:has(.game-panel > div:not([style*="display: none"]))) #chrono {
+    font-size: 4.5em !important;
+    margin-top: 15px !important;
+}
+
+/* =========================================
+   STYLE DES BOÎTES RÉTRO (Communs)
+========================================= */
+.retro-box {
+    background: #111111;
+    padding: clamp(15px, 4vh, 30px); 
+    border: 4px solid #FFFFFF;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.game-panel > .retro-box:not([style*="display: none"]) {
+    display: flex !important;
+    flex-direction: column;
+    flex-grow: 1; 
+    margin-bottom: 0; 
+    min-height: 100%; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.status-box { 
+    border-color: #FFF;    
+    box-shadow: 8px 8px 0px #444; 
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    margin-bottom: 0;
+    transition: all 0.5s ease;
+    overflow: hidden; 
+}
+
+.mastermind-box { border-color: #FFFF00; box-shadow: 8px 8px 0px #FFFF00; }
+.quiz-box       { border-color: #00CCFF; box-shadow: 8px 8px 0px #00CCFF; }
+.maboul-box     { border-color: #FF0055; box-shadow: 8px 8px 0px #FF0055; }
+
+/* =========================================
+   BOUTONS ET CONTRÔLES
+========================================= */
+.controls-container {
+    text-align: center;
+    margin: 0;
+    flex-shrink: 0; 
+    width: 100%;
+}
+
+.btn-stop {
+    font-family: 'VT323', monospace;
+    background: #000;
+    color: #00CCFF; 
+    border: 4px solid #00CCFF;
+    padding: clamp(10px, 2vh, 15px) 20px;
+    font-size: 1.3em;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px #00CCFF;
+    transition: all 0.1s;
+    width: 100%; 
+}
+
+.btn-stop:active:not(:disabled) {
+    transform: translate(4px, 4px);
+    box-shadow: 0px 0px 0px #00CCFF;
+}
+
+.btn-stop:hover:not(:disabled) {
+    background: #00CCFF;
+    color: #000;
+}
+
+.btn-stop:disabled {
+    border-color: #444;
+    color: #444;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.mm-select {
+    background: #000;
+    border: 3px solid #FFFFFF;
+    color: #FFFFFF;
+    font-family: 'VT323', monospace;
+    font-size: 1.1em;
+    padding: clamp(5px, 1vh, 10px);
+    margin: 5px;
+    outline: none;
+}
+
+/* =========================================
+   SPECIFIQUE JEUX (COMPRESSION MAXIMALE)
+========================================= */
+#mm-history {
+    flex-grow: 1; 
+    min-height: 80px; 
+    overflow-y: auto;  
+    border: 2px dashed #FFFF00;
+    padding: 10px;
+    background: #000;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#enigme-container h2, #enigme-container p, #enigme-container > div:not(#mm-history) {
+    flex-shrink: 0;
+    margin-bottom: 10px !important; 
+}
+
+/* ---> OPTIMISATION EXTRÊME POUR LE QUIZ <--- */
+#quiz-survie-container {
+    padding: 15px 20px !important; 
+}
+
+#quiz-question-text {
+    font-size: 1.2em !important; 
+    line-height: 1.1 !important;
+    margin-bottom: 15px !important;
+    min-height: 0 !important; 
+    flex-shrink: 0;
+}
+
+/* MAGIE : 3 colonnes ! Ça fait seulement 2 lignes de boutons au lieu de 6 ! */
+#quiz-choices {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 8px; 
+    margin-bottom: 10px;
+}
+
+.quiz-choice-btn {
+    font-family: 'VT323', monospace;
+    padding: 10px 5px !important; 
+    background: #000;
+    color: #FFFFFF;
+    border: 2px solid #FFFFFF !important; 
+    cursor: pointer;
+    font-size: 1.1em !important; 
+    margin: 0 !important; 
+    transition: all 0.1s;
+    box-shadow: 2px 2px 0px #FFFFFF !important; 
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.quiz-choice-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px #FFFFFF !important;
+}
+
+.quiz-choice-btn:hover {
+    background: #FF0055 !important; 
+    color: #000 !important;
+    border-color: #FF0055 !important;
+    box-shadow: 2px 2px 0px #880022 !important; 
+}
+
+.bypass-btn {
+    background: #222;
+    border: 2px solid #555;
+    padding: 8px 10px !important;
+    color: #888;
+    cursor: pointer;
+    font-family: 'VT323', monospace;
+    font-size: 1em !important;
+    margin-top: 10px !important; 
+    transition: all 0.2s;
+    align-self: center;
+}
+.bypass-btn:hover {
+    color: #FFF;
+    border-color: #FFF;
+}
+
+.maboul-box-inner {
+    background: #000;
+    border: 4px dashed #555;
+    padding: 15px !important;
+    margin-top: 15px !important;
+    text-align: center;
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.maboul-instruction {
+    font-size: 1.1em;
+    line-height: 1.4;
+}
+
+.status-attente { 
+    border-color: #FFFF00; 
+    color: #FFFF00; 
+}
+
+.status-en-cours { 
+    border-color: #FF0055; 
+    color: #FF0055; 
+    animation: blinkMaboul 1.5s infinite; 
+}
+
+@keyframes blinkMaboul { 
+    50% { border-color: transparent; } 
+}
+
+/* =========================================
+   BARRE DE DÉFILEMENT STYLE RÉTRO 8-BIT
+========================================= */
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background: #000;
+    border-left: 2px solid #333;
+}
+::-webkit-scrollbar-thumb {
+    background: #00CCFF; 
+}

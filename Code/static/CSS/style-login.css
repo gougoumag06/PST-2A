@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body, .container {
+    min-height: 100vh;
+    background-color: #000000;
+    /* Grille rétro rouge */
+    background-image: 
+        linear-gradient(rgba(255, 0, 85, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 85, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Press Start 2P', cursive;
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.form-container {
+    background: #111111;
+    padding: 60px; 
+    border: 6px solid #FFFFFF; 
+    box-shadow: 15px 15px 0px #FF0055; /* Ancien Vert -> Rouge */
+    width: 90%;
+    max-width: 700px; 
+    box-sizing: border-box;
+    font-size: 1.5rem; 
+}
+
+.admin-badge {
+    background: #00CCFF; /* Ancien Rouge -> Bleu */
+    color: #000;
+    padding: 10px 16px;
+    font-size: 0.65em; 
+    display: inline-block;
+    border: 4px solid #FFF; 
+}
+
+h2 {
+    color: #FFFF00; /* Ancien Bleu -> Jaune */
+    font-size: 1.1em;
+    text-align: center;
+    margin-bottom: 35px;
+    margin-top: 25px;
+}
+
+.form-group label {
+    color: #FFFFFF;
+    font-size: 0.6em;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 18px; 
+    background: #000;
+    border: 6px solid #FFFFFF; 
+    color: #FF0055; /* Ancien Vert -> Rouge */
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7em;
+    margin-bottom: 30px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: #FFFF00; /* Ancien Bleu -> Jaune */
+    color: #FFFFFF;
+}
+
+button[type="submit"] {
+    width: 100%;
+    font-family: 'Press Start 2P', cursive;
+    background: #000;
+    color: #FF0055; /* Ancien Vert -> Rouge */
+    border: 6px solid #FF0055; 
+    padding: 20px; 
+    font-size: 0.8em;
+    cursor: pointer;
+    box-shadow: 6px 6px 0px #FF0055; 
+    transition: all 0.1s;
+}
+
+button[type="submit"]:active {
+    transform: translate(6px, 6px);
+    box-shadow: 0px 0px 0px #FF0055;
+}
+
+button[type="submit"]:hover {
+    background: #FF0055;
+    color: #000;
+}
+
+.message.error {
+    background: #00CCFF; /* Ancien Rouge -> Bleu */
+    color: #000;
+    padding: 15px;
+    font-size: 0.6em;
+    margin-bottom: 20px;
+    border: 4px solid #FFF;
+    text-align: center;
+}

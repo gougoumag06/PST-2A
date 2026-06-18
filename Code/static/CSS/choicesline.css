@@ -1,0 +1,56 @@
+.choice-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.line-btn {
+    font-family: 'Press Start 2P', cursive;
+    padding: 20px 30px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: #000;
+    cursor: pointer;
+    border-radius: 0px;
+    transition: all 0.1s;
+}
+
+.line-btn:any-link {
+    text-decoration: none;
+}
+
+.line-btn:active {
+    transform: translate(4px, 4px);
+}
+
+.line-1 { 
+    color: #FFFF00; /* Ancien Bleu -> Jaune */
+    border: 4px solid #FFFF00;
+    box-shadow: 4px 4px 0px #FFFF00;
+}
+.line-1:active {
+    box-shadow: 0px 0px 0px #FFFF00;
+}
+.line-1:hover { 
+    background: #FFFF00; 
+    color: black; 
+}
+
+.line-2 { 
+    color: #00CCFF; /* Ancien Rouge -> Bleu */
+    border: 4px solid #00CCFF;
+    box-shadow: 4px 4px 0px #00CCFF;
+}
+.line-2:active {
+    box-shadow: 0px 0px 0px #00CCFF;
+}
+.line-2:hover { 
+    background: #00CCFF; 
+    color: black; 
+}
