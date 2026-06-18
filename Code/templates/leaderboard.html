@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Classement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/main.css') }}">
+</head>
+<body>
+    <div class="home-container leaderboard-fullscreen">
+        <h1 class="home-title" style="animation: none;">HIGH SCORES</h1>
+        <p class="home-description">REALTIME RANKING MATRIX</p>
+        
+        <div style="text-align: left; margin-bottom: 10px;">
+            <form method="GET" action="{{ url_for('admin.leaderboard') }}">
+                <label style="font-size: 0.5em; color: #00CCFF; margin-right: 10px;">
+                    FILTER DIFFICULTY :
+                </label>
+                <select name="nb_box" class="filter-select" onchange="this.form.submit()">
+                    <option value="all" {% if current_filter == 'all' %}selected{% endif %}>ALL STAGES</option>
+                    <option value="1" {% if current_filter == '1' %}selected{% endif %}>1 BOX</option>
+                    <option value="2" {% if current_filter == '2' %}selected{% endif %}>2 BOXES</option>
+                    <option value="3" {% if current_filter == '3' %}selected{% endif %}>3 BOXES</option>
+                    <option value="5" {% if current_filter == '5' %}selected{% endif %}>5 BOXES</option>
+                </select>
+            </form>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>RANK</th>
+                        <th>PSEUDO</th>
+                        <th>BOX</th>
+                        <th>CONTACT</th>
+                        <th>COORDS</th>
+                        <th>TRIES</th>
+                        <th>TIME</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for player in players %}
+                    <tr>
+                        <td><span class="rank-badge">#{{ loop.index }}</span></td>
+                        <td><strong>{{ player.pseudo }}</strong></td>
+                        <td>{{ player.nb_box }}</td>
+                        <td>{{ player.contact_method }}</td>
+                        <td>{{ player.contact_info }}</td>
+                        <td>{{ player.try }}</td>
+                        <td style="color: #FFFF00; font-weight: bold;">{{ player.time }}s</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7" style="text-align:center; padding: 40px; color: #555;">
+                            NO DATA FOUND. INSERT COIN.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="choice-buttons" style="margin-top: 0;">
+            <a href="{{ url_for('main.index') }}" style="width: auto;">
+                <button class="btn setting-btn">
+                    MAIN MENU
+                </button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
