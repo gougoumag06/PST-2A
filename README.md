@@ -2,7 +2,7 @@
 
 Bienvenue sur le dépôt de **Button Quest**, notre Projet Scientifique et Technique (PST) de 2ème année à l'ESIEA. 
 
-L'idée derrière ce projet était de construire une valise d'arcade interactive capable d'animer nos stands sur des salons ou des événements étudiants. Concrètement, deux joueurs s'affrontent côte à côte (Ligne 1 contre Ligne 2) sur une série de mini-jeux qui mélangent électronique pure (boutons d'arcade, fil sous tension, crochetage) et épreuves sur écran dans une ambiance rétro-gaming.
+L'idée derrière ce projet était de construire une platforme d'arcade interactive capable d'animer nos stands sur des salons ou des événements étudiants. Concrètement, deux joueurs s'affrontent côte à côte (Ligne 1 contre Ligne 2) sur une série de mini-jeux qui mélangent électronique pure (boutons d'arcade, fil sous tension, crochetage) et épreuves sur écran dans une ambiance rétro-gaming.
 
 ---
 
