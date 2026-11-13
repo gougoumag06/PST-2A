@@ -142,7 +142,7 @@ Accessible depuis le bouton **SETTINGS** du menu principal, il permet d'ajuster 
 
 ## 👥 Équipe & Crédits
 
-Projet réalisé dans le cadre du cursus ingénieur à l'**ESIEA** (Promotion 2A) par :
+Projet réalisé dans le cadre du cursus ingénieur à l'**ESIEA** (Promotion 2029) par :
 * **Thomas Couanon**
 * **Adam Fouchard**
 * **Goulven Magliulo**
