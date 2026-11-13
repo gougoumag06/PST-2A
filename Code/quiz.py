@@ -5,12 +5,16 @@ import os
 
 quiz_bp = Blueprint('quiz', __name__)
 
-# --- CORRECTION DU CHEMIN ---
-# On récupère le dossier actuel (la racine, là où se trouve quiz.py)
+# Direction du fichier quiz.py
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# On pointe vers le sous-dossier 'csv' que tu as créé
+# Direction du dossier csv.
 CHEMIN_CSV = os.path.join(BASE_DIR, 'csv')
 
+# -----------------------------------------------------------
+# Fonction permetant de charger les questions 
+# PARAMETRE : Le nom du fichier
+# RETURN : Un tableaux avec la question et les réponses
+# -----------------------------------------------------------
 def charger_questions(nom_fichier):
     questions = []
     chemin = os.path.join(CHEMIN_CSV, nom_fichier)
@@ -26,11 +30,17 @@ def charger_questions(nom_fichier):
         print(f"[Attention] Fichier CSV introuvable : {chemin}")
     return questions
 
+
+# -----------------------------------------------------------
+# Fonction qui envoie les questions au JSON
+# RETURN : Envoie les question au fichier JS pour afficher sur le web
+# -----------------------------------------------------------
 @quiz_bp.route('/api/questions')
 def api_questions():
     fichiers_themes = ["culture2.csv", "elec.csv", "info.csv", "math.csv", "physique.csv"]
     questions_selectionnees = []
     
+    #On va récupérer une question dans chaque fichier
     for fichier in fichiers_themes:
         lignes = charger_questions(fichier)
         if lignes:

@@ -6,28 +6,41 @@ mastermind_bp = Blueprint('mastermind', __name__)
 COLORS = ['black', 'red', 'blue', 'purple', 'yellow', 'green']
 FRENCH_COLORS = {'black': 'Noir', 'red': 'Rouge', 'blue': 'Bleu', 'purple': 'Violet', 'yellow': 'Jaune', 'green': 'Vert'}
 
-# Dictionnaire d'état par ligne (remplace les variables globales)
+# Dictionnaire d'état par ligne
 ETAT_MASTERMIND = {
     '1': {'active': False, 'resolue': False, 'secret_code': [], 'history': []},
     '2': {'active': False, 'resolue': False, 'secret_code': [], 'history': []}
 }
 
+# -----------------------------------------------------------
+# Fonction qui initialise le mastermind
+# PARAMETRE ligne : La ligne sur laquel joue le joueur
+# -----------------------------------------------------------
 def activer_enigme(ligne):
     ETAT_MASTERMIND[ligne]['active'] = True
     ETAT_MASTERMIND[ligne]['resolue'] = False
     
-    # Remplacement de random.choice par random.sample pour éviter les doublons
+    # initialise le code de couleur (on utilise random.sample pour avoir que des couleurs différentes)
     ETAT_MASTERMIND[ligne]['secret_code'] = random.sample(COLORS, 4)
     
     ETAT_MASTERMIND[ligne]['history'] = []
     print(f"[DEBUG MASTERMIND] Ligne {ligne} - Code secret généré : {ETAT_MASTERMIND[ligne]['secret_code']}")
 
+# -----------------------------------------------------------
+# Fonction qui reset le mastermind
+# PARAMETRE ligne : La ligne sur laquel joue le joueur
+# -----------------------------------------------------------
 def reset_enigme(ligne):
     ETAT_MASTERMIND[ligne]['active'] = False
     ETAT_MASTERMIND[ligne]['resolue'] = False
     ETAT_MASTERMIND[ligne]['secret_code'] = []
     ETAT_MASTERMIND[ligne]['history'] = []
 
+# -----------------------------------------------------------
+# Fonction qui retourn les status du mastermind
+# PARAMETRE ligne : La ligne sur laquel joue le joueur
+# RETURN : Les informations suivantes : Active, Résolue et historique
+# -----------------------------------------------------------
 def get_statut_enigme(ligne):
     return {
         'active': ETAT_MASTERMIND[ligne]['active'],
@@ -35,6 +48,12 @@ def get_statut_enigme(ligne):
         'history': ETAT_MASTERMIND[ligne]['history']
     }
 
+# -----------------------------------------------------------
+# Fonction qui vérifie les réponses donner par le joueur
+# PARAMETRE ligne : La ligne sur laquel joue le joueur
+# PARAMETRE guess : L'envoie du code couleur par le joueur
+# RETURN : Si le joueur à réussi ou non
+# -----------------------------------------------------------
 def verifier_reponse(ligne, guess):
     etat = ETAT_MASTERMIND[ligne]
     
@@ -67,6 +86,10 @@ def verifier_reponse(ligne, guess):
     
     return {'status': 'incorrect', 'history': etat['history']}
 
+# -----------------------------------------------------------
+# Fonction qui envoie les données au JSON
+# RETURN : Les informations
+# -----------------------------------------------------------
 @mastermind_bp.route('/obtenirEnigme', methods=['GET'])
 def obtenir_enigme():
     ligne = str(session.get('line_id', '1'))

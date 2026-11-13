@@ -1,0 +1,48 @@
+/* Désactivation de l'animation sur le titre */
+.title-no-anim {
+    animation: none;
+}
+
+/* Zone du filtre de difficulté */
+.filter-wrapper {
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.filter-label {
+    font-size: 0.5em;
+    color: #00CCFF;
+    margin-right: 10px;
+}
+
+/* Table du tableau de bord */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table th, 
+.admin-table td {
+    text-align: center;
+}
+
+/* Style de la colonne temps (Jaune rétro) */
+.time-cell {
+    color: #FFFF00;
+    font-weight: bold;
+}
+
+/* Ligne vide (No data found) */
+.no-data-cell {
+    padding: 40px;
+    color: #555;
+}
+
+/* Bouton Menu Principal */
+.choice-buttons-wrapper {
+    margin-top: 0;
+}
+
+.choice-buttons-wrapper a {
+    width: auto;
+}

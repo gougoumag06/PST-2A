@@ -35,7 +35,6 @@ echo "Lancement de la sauvegarde automatique sur clé USB..."
 echo "-----------------------------------------------------"
 
 # On utilise le python de ton environnement virtuel pour lancer le script
-# (Note : si auto_usb_backup.py tourne en boucle infinie, ajoute un & à la fin de cette ligne)
 /home/pst/PST/.venv/bin/python /home/pst/PST/auto_usb_backup.py
 
 echo "-----------------------------------------------------"

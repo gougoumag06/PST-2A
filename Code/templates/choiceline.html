@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Choix de la Ligne</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='CSS/main.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/choicesline.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/choiceline.css') }}">
 </head>
 <body>
     <div class="home-container">
@@ -16,11 +15,11 @@
         
         <div class="choice-buttons">
             <a href="{{ url_for('player.login', line=1) }}" style="text-decoration: none;">
-                <button class="btn line-btn line-1">🏭 LIGNE 1</button>
+                <button class="btn line-btn line-1">LIGNE 1</button>
             </a>
 
             <a href="{{ url_for('player.login', line=2) }}" style="text-decoration: none;">
-                <button class="btn line-btn line-2">🏭 LIGNE 2</button>
+                <button class="btn line-btn line-2">LIGNE 2</button>
             </a>
         </div>
         
@@ -31,6 +30,6 @@
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='JS/choicesline.js') }}"></script>
+    <script src="{{ url_for('static', filename='JS/choiceline.js') }}"></script>
 </body>
 </html>

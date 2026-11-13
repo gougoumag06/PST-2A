@@ -2,3 +2,8 @@ Flask
 pymongo
 python-dotenv
 Werkzeug
+gpiozero
+Adafruit-Blinka
+adafruit-circuitpython-mcp230xx
+raspberrypi-tm1637
+

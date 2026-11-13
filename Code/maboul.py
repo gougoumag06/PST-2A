@@ -33,7 +33,7 @@ def enregistrer_callback_penalite(fonction):
 #  IMPORT GPIO
 # =============================================
 try:
-    from GPIO import get_maboul_input, init_gpio
+    from GPIO import get_maboul_input
     _gpio_ok = True
     print("[MABOUL] Import GPIO OK")
 except ImportError as e:
@@ -53,6 +53,21 @@ def _get_pins(ligne):
     except Exception as e:
         print(f"[MABOUL] Erreur récupération pins : {e}")
         return None, None, None
+
+# =============================================
+#  🛡️ BOUCLIER ANTI-CRASH I2C 🛡️
+# =============================================
+def safe_is_pressed(pin):
+    """
+    Lit le pin en toute sécurité. 
+    Si le câble I2C tremble (Errno 5 ou 121), renvoie simplement False sans faire crasher le jeu !
+    """
+    if not pin: 
+        return False
+    try:
+        return pin.is_pressed
+    except Exception:
+        return False
 
 # =============================================
 #  STRUCTURE DE L'ÉTAT DU JEU
@@ -86,9 +101,12 @@ def _build_payload(ligne):
         'nb_touches': state.nb_touches
     }
 
-# =============================================
-#  BOUCLE TIMER INFINI + SURVEILLANCE
-# =============================================
+# -----------------------------------------------------------
+# Fonction qui est la boucle principale qui vérifie tous les contacts entre les fils
+# PARAMETRE ligne : La ligne sur laquel joue le joueur
+# PARAMETRE pin_touch : pin du fil de cuivre
+# PARAMETRE pin_end : pin du fil de fin
+# -----------------------------------------------------------
 def timer_loop(ligne, pin_touch, pin_end):
     state = ETAT_MABOUL[ligne]
     last_touch = False
@@ -100,7 +118,8 @@ def timer_loop(ligne, pin_touch, pin_end):
             continue
 
         if pin_touch:
-            cur = pin_touch.is_pressed
+            # Utilisation du bouclier pour la lecture
+            cur = safe_is_pressed(pin_touch)
             if cur and not last_touch:
                 state.nb_touches += 1
                 print(f"[MABOUL LIGNE {ligne}] 💥 TOUCHE FIL → Pénalité +{state.temps_bonus}s envoyée au général !")
@@ -111,9 +130,10 @@ def timer_loop(ligne, pin_touch, pin_end):
             last_touch = cur
 
         if pin_end:
-            cur = pin_end.is_pressed
+            # Utilisation du bouclier pour la lecture
+            cur = safe_is_pressed(pin_end)
             if cur and not last_end:
-                print(f"[MABOUL] 🏁 CONTACT END DETECTÉ !")
+                print(f"[MABOUL LIGNE {ligne}] 🏁 CONTACT END DETECTÉ !")
                 _game_over(ligne, 'success')
                 
                 if CALLBACK_VICTOIRE:
@@ -121,15 +141,22 @@ def timer_loop(ligne, pin_touch, pin_end):
                 break
             last_end = cur
 
+# -----------------------------------------------------------
+# Fonction qui met à jour les états une fois le maboul terminé
+# PARAMETRE ligne : La ligne sur laquel joue le joueur
+# PARAMETRE result : L'envoie du code couleur par le joueur
+# -----------------------------------------------------------
 def _game_over(ligne, result):
     state = ETAT_MABOUL[ligne]
     state.phase  = 'finished'
     state.result = result
     state.stop_event.set()
 
-# =============================================
-#  SURVEILLANCE DÉPART STRICTE SUR LE 'START'
-# =============================================
+
+# -----------------------------------------------------------
+# Fonction qui vérifie quand le pin start est toucher
+# PARAMETRE ligne : La ligne sur laquel joue le joueur
+# -----------------------------------------------------------
 def watch_start(ligne):
     state = ETAT_MABOUL[ligne]
     pin_start, pin_touch, pin_end = _get_pins(ligne)
@@ -141,20 +168,21 @@ def watch_start(ligne):
         if state.phase != 'idle':
             break
 
-        # On ne regarde QUE le capteur START
-        s_pressed = pin_start.is_pressed if pin_start else False
+        # Lecture sécurisée du start
+        s_pressed = safe_is_pressed(pin_start)
 
-        # Dès que START passe en "Touché" (True)
         if s_pressed:
             print(f"[MABOUL LIGNE {ligne}] 🚀 DÉMARRAGE ! Le joueur a touché le START.")
-            
-            # Petite grâce d'une demi-seconde pour laisser le joueur lever la main
-            # sans déclencher le fil de cuivre instantanément s'il tremble
             time.sleep(0.5) 
-            
             _start_game(ligne, pin_touch, pin_end)
             break
 
+# -----------------------------------------------------------
+# Fonction qui est appeller quand on touche le pin start
+# PARAMETRE ligne : La ligne sur laquel joue le joueur
+# PARAMETRE pin_touch : pin du fil de cuivre
+# PARAMETRE pin_end : pin du fil de fin
+# -----------------------------------------------------------
 def _start_game(ligne, pin_touch, pin_end):
     state = ETAT_MABOUL[ligne]
     state.phase = 'playing'
@@ -164,10 +192,11 @@ def _start_game(ligne, pin_touch, pin_end):
     state.timer_thread = threading.Thread(target=timer_loop, args=(ligne, pin_touch, pin_end), daemon=True)
     state.timer_thread.start()
 
-# =============================================
-#  FONCTIONS EXPORTÉES : LANCEMENT ET ARRÊT
-# =============================================
-def lancer_maboul_physique(ligne='1'):
+# -----------------------------------------------------------
+# Fonction qui lance le maboul avec les thread pour la vérification des inputs
+# PARAMETRE ligne : La ligne sur laquel joue le joueur
+# -----------------------------------------------------------
+def lancer_maboul_physique(ligne):
     ligne = str(ligne)
     state = ETAT_MABOUL[ligne]
     state.stop_event.set()
@@ -181,25 +210,41 @@ def lancer_maboul_physique(ligne='1'):
     state.watch_thread = threading.Thread(target=watch_start, args=(ligne,), daemon=True)
     state.watch_thread.start()
 
-def arreter_maboul_physique(ligne='1'):
+# -----------------------------------------------------------
+# Fonction qui permet d'arrêter le maboul
+# PARAMETRE ligne : La ligne sur laquel joue le joueur
+# -----------------------------------------------------------
+def arreter_maboul_physique(ligne):
     ligne = str(ligne)
     if ligne in ETAT_MABOUL:
         state = ETAT_MABOUL[ligne]
         state.stop_event.set()
         state.reset()
 
-# =============================================
-#  ROUTES API
-# =============================================
+
+
+
+# -----------------------------------------------------------
+# Fonction qui va sur la page du maboul
+# RETURN : affichage la page du maboul
+# -----------------------------------------------------------
 @maboul_bp.route('/')
 def index():
     return render_template('maboul.html')
 
+# -----------------------------------------------------------
+# Fonction qui envoie les status au JSON
+# RETURN : envoie les informations pour faire fonctionne le maboul
+# -----------------------------------------------------------
 @maboul_bp.route('/status')
 def status():
     ligne = request.args.get('line') or str(session.get('line_id', '1'))
     return jsonify(_build_payload(ligne))
 
+# -----------------------------------------------------------
+# Fonction qui désactive le maboul
+# RETURN : 
+# -----------------------------------------------------------
 @maboul_bp.route('/desactiver', methods=['POST'])
 def desactiver():
     ligne = request.args.get('line') or str(session.get('line_id', '1'))

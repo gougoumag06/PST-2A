@@ -6,6 +6,8 @@ import time
 from digitalio import Direction, Pull
 from adafruit_mcp230xx.mcp23017 import MCP23017
 
+# === LE FEU ROUGE POUR L'I2C (Évite les embouteillages et crashs) ===
+i2c_lock = threading.RLock()
 
 # === INITIALISATION DU MODULE I2C ===
 try:
@@ -24,8 +26,7 @@ except Exception as e:
     mcp2 = None
 
 
-# === CLASSES ADAPTATEURS POUR LE MODULE ===
-# Ces classes imitent le comportement de gpiozero pour ne pas casser ton code
+# === CLASSES ADAPTATEURS BLINDÉES POUR LE MODULE ===
 
 class MCP_LED:
     def __init__(self, mcp_device, pin_number):
@@ -34,14 +35,34 @@ class MCP_LED:
         self.pin.value = False
 
     def on(self):
-        self.pin.value = True
+        # On insiste jusqu'à 5 fois en cas de micro-coupure I2C !
+        for _ in range(5):
+            with i2c_lock:
+                try:
+                    self.pin.value = True
+                    return  # Succès : la LED est allumée
+                except Exception:
+                    pass # Échec : on ignore et on réessaie
+            time.sleep(0.02)
 
     def off(self):
-        self.pin.value = False
+        # On insiste aussi pour l'extinction
+        for _ in range(5):
+            with i2c_lock:
+                try:
+                    self.pin.value = False
+                    return  # Succès
+                except Exception:
+                    pass
+            time.sleep(0.02)
 
     @property
     def is_lit(self):
-        return self.pin.value
+        with i2c_lock:
+            try:
+                return self.pin.value
+            except Exception:
+                return False
 
     def close(self):
         self.off()
@@ -53,19 +74,23 @@ class MCP_Button:
         self.pin.direction = Direction.INPUT
         self.pin.pull = Pull.UP 
         
-        # Variables pour gérer l'événement when_pressed
         self._when_pressed_callback = None
-        self._last_state = self.is_pressed
+        self._last_state = False
         
-        # Thread de surveillance (tourne en arrière-plan)
         self._stop_event = threading.Event()
         self._monitor_thread = threading.Thread(target=self._monitor, daemon=True)
         self._monitor_thread.start()
 
     @property
     def is_pressed(self):
-        # Inversé car Pull-Up (0V quand pressé)
-        return not self.pin.value 
+        # 🛡️ LE BOUCLIER ABSOLU EST ICI 🛡️
+        with i2c_lock:
+            try:
+                # Inversé car Pull-Up (0V quand pressé)
+                return not self.pin.value 
+            except Exception:
+                # Si le câble I2C tremble, on dit juste "bouton non pressé" sans crasher !
+                return False
 
     @property
     def when_pressed(self):
@@ -73,7 +98,6 @@ class MCP_Button:
 
     @when_pressed.setter
     def when_pressed(self, callback):
-        # C'est ici que ton code Flask vient attacher sa fonction lambda !
         self._when_pressed_callback = callback
 
     def _monitor(self):
@@ -81,18 +105,17 @@ class MCP_Button:
         while not self._stop_event.is_set():
             current_state = self.is_pressed
             
-            # Si le bouton vient juste d'être pressé (passage de Relâché à Pressé)
             if current_state == True and self._last_state == False:
                 if self._when_pressed_callback is not None:
-                    # On déclenche ta fonction (ex: on_bouton_b1_pressed)
-                    self._when_pressed_callback()
+                    try:
+                        self._when_pressed_callback()
+                    except Exception as e:
+                        print(f"[ERREUR CALLBACK] {e}")
                     
             self._last_state = current_state
-            # Petite pause de 50ms (sert aussi d'anti-rebond basique)
             time.sleep(0.05) 
 
     def close(self):
-        # Arrête le thread proprement quand on nettoie les GPIO
         self._stop_event.set()
 
 # === CONFIGURATION DES GPIO ===
@@ -231,17 +254,9 @@ def init_gpio():
         print(f"[ERREUR CRITIQUE] {e}\n")
         return False
 
-# ... (Le reste de tes fonctions demandeGPIO, eteindre_tous_leds, etc. reste STRICTEMENT identique !)
-
 def demandeGPIO(nom_gpio):
     """
     Retourne l'objet GPIO correspondant au nom
-    
-    Args:
-        nom_gpio (str): Nom logique du GPIO (ex: 'led_start_L1')
-    
-    Returns:
-        LED or Button or None: Objet GPIO ou None si non trouvé
     """
     if nom_gpio not in Dict_GPIO:
         print(f"[ERREUR] GPIO '{nom_gpio}' non trouvé dans Dict_GPIO")
@@ -283,9 +298,6 @@ def allumer_tous_leds():
 def get_gpio_status():
     """
     Retourne l'état de tous les GPIO
-    
-    Returns:
-        dict: État de chaque GPIO
     """
     status = {}
     for nom, obj in Dict_GPIO.items():
@@ -315,13 +327,6 @@ def cleanup_gpio():
 def get_led(niveau, boite):
     """
     Récupère une LED spécifique
-    
-    Args:
-        niveau (int): 1 ou 2
-        boite (str): 'start', 'b1', 'b2', 'b3', 'b4'
-    
-    Returns:
-        LED or None
     """
     nom = f"led_{boite}_L{niveau}"
     led = demandeGPIO(nom)
@@ -336,13 +341,6 @@ def get_led(niveau, boite):
 def get_bouton(niveau, boite):
     """
     Récupère un bouton spécifique
-    
-    Args:
-        niveau (int): 1 ou 2
-        boite (str): 'start', 'b1', 'b2', 'b3', 'b4'
-    
-    Returns:
-        Button or None
     """
     nom = f"bouton_{boite}_L{niveau}"
     bouton = demandeGPIO(nom)

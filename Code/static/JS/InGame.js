@@ -1,9 +1,8 @@
-// ==========================================
-// === RÉGLAGES DU JEU ======================
-// ==========================================
-const MODE_DEV_ACTIF = true; 
+let MODE_DEV_ACTIF = true; 
 
 let updateInterval = null;
+let transitionTimeout = null; // LE FAMEUX TUEUR DE MINUTEUR
+
 const btnStop = document.getElementById('btn-stop');
 
 let isFetchingChrono = false;
@@ -12,16 +11,9 @@ let isFetchingQuizStatus = false;
 let isFetchingMaboul = false;
 let isChronoPenalized = false;
 
-// === On mémorise la ligne pour la redirection et le polling ===
 let currentLine = '1';
 
 window.onload = function() {
-    if (!MODE_DEV_ACTIF) {
-        const style = document.createElement('style');
-        style.innerHTML = '.bypass-btn { display: none !important; }';
-        document.head.appendChild(style);
-    }
-
     document.getElementById('status').innerHTML = 
         '<p class="status-message">⏳ Vérification de l\'état de la bombe...</p>';
 
@@ -30,6 +22,17 @@ window.onload = function() {
     .then(data => {
         const etat = data.etat;
         
+        // --- LECTURE DU MODE DEV DEPUIS LE SERVEUR ---
+        if (data.mode_dev !== undefined) {
+            MODE_DEV_ACTIF = data.mode_dev;
+        }
+        
+        if (!MODE_DEV_ACTIF) {
+            const style = document.createElement('style');
+            style.innerHTML = '.bypass-btn { display: none !important; }';
+            document.head.appendChild(style);
+        }
+
         if (data.ligne_active) {
             currentLine = data.ligne_active;
         }
@@ -76,7 +79,6 @@ function allumerLedBouton() {
 
 function demarrerMiseAJourChrono() {
     updateInterval = setInterval(() => {
-        
         if (!isFetchingChrono) {
             isFetchingChrono = true;
             fetch('/bouton/obtenirTempsActuel?line=' + currentLine)
@@ -104,6 +106,9 @@ function demarrerMiseAJourChrono() {
                         
                 } else if (data.status === 'stopped') {
                     clearInterval(updateInterval);
+                    // SI LE JEU EST FINI, ON ANNULE L'APPARITION DU CROCHETAGE !
+                    if (transitionTimeout) clearTimeout(transitionTimeout); 
+                    
                     btnStop.disabled = true;
                     
                     document.getElementById('status').innerHTML = 
@@ -115,6 +120,7 @@ function demarrerMiseAJourChrono() {
                     document.getElementById('enigme-container').style.display = 'none';
                     document.getElementById('quiz-survie-container').style.display = 'none';
                     document.getElementById('maboul-container').style.display = 'none'; 
+                    document.getElementById('lockpicking-container').style.display = 'none'; 
                 }
             })
             .catch(error => console.error('Erreur Chrono:', error))
@@ -124,10 +130,16 @@ function demarrerMiseAJourChrono() {
 }
 
 function arreterJeu() {
+    if (!confirm("Êtes-vous sûr de vouloir abandonner la mission ?")) return;
+
     btnStop.disabled = true;
     quizAlreadyStarted = false;
     
-    fetch('/bouton/resetJeu', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
+    // SI ON ABANDONNE, ON ANNULE AUSSI L'APPARITION DU CROCHETAGE !
+    if (transitionTimeout) clearTimeout(transitionTimeout);
+
+    // On appelle la route d'abandon qui enregistre le score
+    fetch('/bouton/abandonnerJeu', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
     .then(response => response.json())
     .then(data => {
         if (updateInterval) {
@@ -135,18 +147,16 @@ function arreterJeu() {
             updateInterval = null;
         }
         
-        document.getElementById('status').innerHTML = 
-            '<div class="emoji-large">⏹️</div>' +
-            '<p style="color: red; font-size: 24px; font-weight: bold;">Jeu arrêté manuellement</p>' +
-            '<button onclick="quitterEtReset()" class="btn-stop" style="margin-top: 20px; background: #FFFF00; color: #000; border-color: #FFFF00; box-shadow: 4px 4px 0px #888800;">🔁 RETOUR INSCRIPTION</button>';
-        
-        document.getElementById('enigme-container').style.display = 'none';
-        document.getElementById('quiz-survie-container').style.display = 'none';
-        document.getElementById('maboul-container').style.display = 'none';
-        
-        fetch('/maboul/desactiver', { method: 'POST' }); 
+        // Désactivation propre du module maboul
+        fetch('/maboul/desactiver', { method: 'POST' });
+
+        // Redirection instantanée vers la page d'inscription/connexion
+        window.location.href = '/player/login?line=' + currentLine;
     })
-    .catch(error => { btnStop.disabled = false; });
+    .catch(error => { 
+        console.error("Erreur lors de l'abandon:", error);
+        btnStop.disabled = false; 
+    });
 }
 
 function quitterEtReset() {
@@ -174,7 +184,7 @@ function verifierEnigme() {
     .then(response => response.json())
     .then(data => {
         if (data.status === 'active') {
-            if(document.getElementById('maboul-container').style.display !== 'block') {
+            if(document.getElementById('maboul-container').style.display !== 'block' && document.getElementById('lockpicking-container').style.display !== 'block') {
                 document.getElementById('enigme-container').style.display = 'block';
             }
             if (!mmSelectsFilled) {
@@ -339,12 +349,12 @@ function showQuizQuestion() {
     choicesDiv.innerHTML = '';
     
     const quizColors = [
-        { bg: '#e74c3c', hover: '#c0392b', keyLabel: 'R', key: 'r' }, 
-        { bg: '#3498db', hover: '#2980b9', keyLabel: 'B', key: 'b' }, 
-        { bg: '#2ecc71', hover: '#27ae60', keyLabel: 'G', key: 'g' }, 
-        { bg: '#f1c40f', hover: '#f39c12', keyLabel: 'Y', key: 'y' }, 
-        { bg: '#9b59b6', hover: '#8e44ad', keyLabel: 'P', key: 'p' }, 
-        { bg: '#100e0e', hover: '#000000', keyLabel: 'K', key: 'k' }  
+        { bg: '#e74c3c', hover: '#c0392b', keyLabel: 'R', key: 'r' }, // 0. Rouge
+        { bg: '#3498db', hover: '#2980b9', keyLabel: 'B', key: 'b' }, // 1. Bleu
+        { bg: '#100e0e', hover: '#333333', keyLabel: 'K', key: 'k' }, // 2. NOIR (Déplacé au milieu)
+        { bg: '#2ecc71', hover: '#27ae60', keyLabel: 'G', key: 'g' }, // 3. Vert
+        { bg: '#f1c40f', hover: '#f39c12', keyLabel: 'Y', key: 'y' }, // 4. Jaune
+        { bg: '#9b59b6', hover: '#8e44ad', keyLabel: 'P', key: 'p' }  // 5. Violet
     ];
 
     q.choix.forEach((choix, index) => {
@@ -353,6 +363,13 @@ function showQuizQuestion() {
 
         btn.className = 'quiz-choice-btn';
         btn.style.backgroundColor = colorDef.bg;
+        
+        // On s'assure que le texte sur le bouton noir est bien visible
+        if (colorDef.key === 'k') {
+            btn.style.color = '#FFFFFF';
+            btn.style.border = '2px solid #555555';
+        }
+        
         btn.innerHTML = choix;        
         btn.onmouseover = () => btn.style.backgroundColor = colorDef.hover;
         btn.onmouseout = () => btn.style.backgroundColor = colorDef.bg;
@@ -413,9 +430,15 @@ function bypassQuiz() {
 function validerVictoireQuiz(message) {
     document.getElementById('quiz-error-msg').innerText = "";
     document.getElementById('quiz-survie-container').innerHTML = `<h2 style='color:#2ecc71; text-align:center;'>${message}</h2>`;
+    
     fetch('/bouton/validerQuiz', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
     .then(() => {
-        setTimeout(() => { document.getElementById('quiz-survie-container').style.display = 'none'; }, 3000);
+        // ON LANCE ET ON SAUVEGARDE L'IDENTIFIANT DU MINUTEUR
+        if (transitionTimeout) clearTimeout(transitionTimeout);
+        transitionTimeout = setTimeout(() => { 
+            document.getElementById('quiz-survie-container').style.display = 'none'; 
+            document.getElementById('lockpicking-container').style.display = 'block';
+        }, 3000); 
     });
 }
 
@@ -429,7 +452,6 @@ function verifierMaboulActif() {
     if (isFetchingMaboul) return;
     isFetchingMaboul = true;
 
-    // ---> SÉCURITÉ ULTIME : Le JS dit clairement au serveur sur quelle ligne il est !
     fetch('/maboul/status?line=' + currentLine)
     .then(res => res.json())
     .then(data => {
@@ -540,7 +562,8 @@ document.addEventListener('keydown', function(event) {
     }
 
     if (document.getElementById('quiz-survie-container').style.display === 'block') {
-        const keyMapQuiz = { 'r': 0, 'b': 1, 'g': 2, 'y': 3, 'p': 4, 'k': 5 };
+        const keyMapQuiz = { 'r': 0, 'b': 1, 'k': 2, 'g': 3, 'y': 4, 'p': 5 };
+        
         const indexChoisi = keyMapQuiz[key];
         if (indexChoisi !== undefined) {
             const q = quizQuestions[quizCurrentIndex];

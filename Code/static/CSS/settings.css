@@ -1,0 +1,114 @@
+body { 
+    font-family: 'Press Start 2P', monospace; 
+    background-color: #000; 
+    color: #00FF00; 
+    text-align: center; 
+    padding: 20px; 
+}
+
+h1 { 
+    color: #FFFF00; 
+    text-shadow: 2px 2px #555; 
+    margin-bottom: 40px; 
+}
+
+h2 { 
+    font-size: 1em; 
+    color: #FF0055; 
+    border-bottom: 2px dashed #333; 
+    padding-bottom: 10px; 
+    margin-bottom: 20px; 
+    text-transform: uppercase; 
+}
+
+.settings-container { 
+    background: #111; 
+    border: 4px solid #00FF00; 
+    padding: 30px; 
+    max-width: 600px; 
+    margin: 0 auto; 
+    box-shadow: 8px 8px 0px #333; 
+}
+
+.etape-row { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 25px; 
+    padding-bottom: 15px; 
+    border-bottom: 1px dashed #222; 
+    text-align: left; 
+}
+
+label { 
+    font-size: 0.7em; 
+    color: #00CCFF; 
+    width: 50%; 
+    line-height: 1.4; 
+}
+
+/* Petites descriptions sous les labels */
+.sub-label {
+    color: #555; 
+    font-size: 0.8em;
+}
+
+select, input[type="number"] { 
+    background: #000; 
+    color: #FFF; 
+    border: 2px solid #00FF00; 
+    font-family: 'Press Start 2P', monospace; 
+    padding: 10px; 
+    font-size: 0.7em; 
+    width: 45%; 
+    cursor: pointer; 
+    box-sizing: border-box; 
+}
+
+select:focus, input[type="number"]:focus { 
+    outline: none; 
+    border-color: #FFFF00; 
+}
+
+.btn-save { 
+    background: #00FF00; 
+    color: #000; 
+    border: 4px solid #009900; 
+    padding: 15px 30px; 
+    font-family: 'Press Start 2P', monospace; 
+    font-size: 1em; 
+    cursor: pointer; 
+    margin-top: 20px; 
+    transition: all 0.1s; 
+    width: 100%; 
+}
+
+.btn-save:hover { 
+    background: #FFFF00; 
+    border-color: #CCCC00; 
+}
+
+.btn-save:active { 
+    transform: translate(4px, 4px); 
+}
+
+/* Note d'information sur l'ordre physique des modules */
+.info-note {
+    color: #888; 
+    font-size: 0.6em; 
+    text-align: left; 
+    line-height: 1.5; 
+    margin-top: 30px;
+}
+
+.home-link { 
+    display: block; 
+    margin-top: 30px; 
+    color: #888; 
+    text-decoration: none; 
+    font-size: 0.7em; 
+}
+
+.home-link:hover { 
+    color: #FFF; 
+}

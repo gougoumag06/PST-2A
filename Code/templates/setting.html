@@ -1,13 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Paramètres de la Valise</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/settings.css') }}">
 </head>
 <body>
-    <p>Settings Page</p>
-    
-    
+
+    <h1>⚙️ SYSTÈME CENTRAL ⚙️</h1>
+
+    <div class="settings-container">
+        <form id="settings-form" method="POST" action="{{ url_for('admin.setting_admin') }}">
+            
+            <h2>[ RÉGLAGES GLOBAUX ]</h2>
+            
+            <div class="etape-row">
+                <label>
+                    ⏱️ TEMPS MAXIMUM DU JEU<br>
+                    <span class="sub-label">(En secondes)</span>
+                </label>
+                <input type="number" name="temps_max" value="{{ config.temps_max }}" min="60" max="9999">
+            </div>
+
+            <div class="etape-row">
+                <label>
+                    🛠️ MODE DÉVELOPPEUR<br>
+                    <span class="sub-label">(Affiche le bouton Bypass Devs)</span>
+                </label>
+                <select name="mode_dev">
+                    <option value="oui" {% if config.mode_dev %}selected{% endif %}>ACTIVÉ</option>
+                    <option value="non" {% if not config.mode_dev %}selected{% endif %}>DÉSACTIVÉ</option>
+                </select>
+            </div>
+
+            <p class="info-note">
+                * L'ordre des épreuves est ancré physiquement : <br><br>
+                START ➔ B1 (Maboul) ➔ B2 (mastermind) ➔ B3 (quizz) ➔ B4 (lockpicking).
+            </p>
+
+            <button type="submit" class="btn-save">💾 SAUVEGARDER</button>
+        </form>
+    </div>
+
+    <a href="/" class="home-link">Retour à l'accueil</a>
+
+    <script src="{{ url_for('static', filename='JS/settings.js') }}" defer></script>
 </body>
 </html>
